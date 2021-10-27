@@ -16,6 +16,8 @@ jobs:
         python-version: 3.7
     - name: install build reqs
       run: ./helper.sh reqs
+    - name: install requirements
+      run: pip install -r requirements.txt
     - name: test
       run: ./helper.sh test
   build:
