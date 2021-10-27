@@ -116,7 +116,9 @@ test()
 {
     info "[test|in]"
     python -m pytest --durations=0 --cov=src --junitxml=test-results.xml --cov-report=xml --cov-report=html
-    info "[test|out]"
+    return_value="$?"
+    info "[test|out] => ${return_value}"
+    [[ ! "$return_value" -eq "0" ]] && exit 1
 }
 
 create_requirements()
