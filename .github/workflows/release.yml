@@ -18,6 +18,8 @@ jobs:
       run: ./helper.sh reqs
     - name: install requirements
       run: pip install -r requirements.txt
+    - name: code check
+      run: ./helper.sh code_check
     - name: run tests
       run: ./helper.sh test
   build:

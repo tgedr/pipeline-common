@@ -75,18 +75,22 @@ EOM
 reqs()
 {
     info "[reqs|in]"
-    python -m pip install --upgrade pip setuptools wheel build twine artifacts-keyring keyring bump2version pipreqs
+    python -m pip install --upgrade pip setuptools wheel build twine artifacts-keyring keyring bump2version pipreqs && \
     python -m pip install astroid==2.5.2 pycodestyle==2.7.0 pyflakes==2.3.0 isort black autoflake pytest pytest-cov
-    info "[reqs|out]"
+    return_value="$?"
+    info "[reqs|out] => ${return_value}"
+    [[ ! "$return_value" -eq "0" ]] && exit 1
 }
 
 code_check()
 {
     info "[code_check|in]"
-    autoflake --in-place --remove-unused-variables --check -r src test
-    isort -rc src test
+    autoflake --in-place --remove-unused-variables --check -r src test && \
+    isort -rc src test && \
     black src test -t py37 --line-length=120
-    info "[code_check|out]"
+    return_value="$?"
+    info "[code_check|out] => ${return_value}"
+    [[ ! "$return_value" -eq "0" ]] && exit 1
 }
 
 bumpversion()
@@ -102,14 +106,18 @@ build()
     info "[build|in]"
     rm -f dist/*
     pyproject-build && twine check dist/*
-    info "[build|out]"
+    return_value="$?"
+    info "[build|out] => ${return_value}"
+    [[ ! "$return_value" -eq "0" ]] && exit 1
 }
 
 publish()
 {
     info "[publish|in]"
     python -m twine upload dist/*.whl
-    info "[publish|out]"
+    return_value="$?"
+    info "[publish|out] => ${return_value}"
+    [[ ! "$return_value" -eq "0" ]] && exit 1
 }
 
 test()
