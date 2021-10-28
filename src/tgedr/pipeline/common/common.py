@@ -63,7 +63,7 @@ class PipelineComponent(ABC):
                 raise ValueError(f"[_get_config] no value or key defined in config entry: {entry}")
         except Exception as le:
             raise PipelineConfigException(f"[_get_config] config not found: {entry}") from le
-        self.log.info(f"[_get_config|out] => {self.text_fragment(result)}")
+        self.log.info(f"[_get_config|out] => {self.text_fragment(str(result))}")
         return result
 
     @abstractmethod
