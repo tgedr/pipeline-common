@@ -7,22 +7,22 @@ from configlookup.main import Configuration
 
 class PipelineException(Exception):
     def __init__(self, *args, **kwargs):
-        super(Exception, self).__init__(*args, **kwargs)
+        super(PipelineException, self).__init__(*args, **kwargs)
 
 
 class PipelineConfigException(PipelineException):
     def __init__(self, *args, **kwargs):
-        super(PipelineException, self).__init__(*args, **kwargs)
+        super(PipelineConfigException, self).__init__(*args, **kwargs)
 
 
 class PipelineSinkException(PipelineException):
     def __init__(self, *args, **kwargs):
-        super(PipelineException, self).__init__(*args, **kwargs)
+        super(PipelineSinkException, self).__init__(*args, **kwargs)
 
 
 class PipelineSourceException(PipelineException):
     def __init__(self, *args, **kwargs):
-        super(PipelineException, self).__init__(*args, **kwargs)
+        super(PipelineSourceException, self).__init__(*args, **kwargs)
 
 
 class PipelineComponent(ABC):
